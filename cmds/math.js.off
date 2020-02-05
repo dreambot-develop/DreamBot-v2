@@ -1,0 +1,10 @@
+module.exports.run = async(bot, message, args, prefix) => {
+  const res = args[0] & args[1] &  args[2]
+  if(!res) return
+  message.channel.send(res)
+}
+module.exports.help = {
+  name: "math",
+      aliases: ["калькулятор"]
+
+}
