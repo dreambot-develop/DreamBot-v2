@@ -1,7 +1,6 @@
 {
-    "prefix":".",
-
+    "prefix":"",
     "bonus":500,
     "cooldown":1440,
-    "admin":"587697798628114442"
+    "admin":""
 }
