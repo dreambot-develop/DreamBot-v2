@@ -4,10 +4,6 @@ global.fs = require('fs');
 const db = require('quick.db')
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
-//const DBL = require('dblapi.js');
-//const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MjI4NTk1MDAzNDQ0NDI5OCIsImJvdCI6dHJ1ZSwiaWF0IjoxNTc0MDgyODI0fQ.QvX-4Td26PTfsl9gXO9Y279WK3zIjYiB4Eo9GoGuyUQ');
-//const SDC = require('sdc-api');
-//const client = new SDC('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MjI4NTk1MDAzNDQ0NDI5OCIsInBlcm1zIjowLCJpYXQiOjE1NzcxMTYxMDJ9.a4-2KNbVvKD_917PMsuS_sSX4JWX-LQO-ElF5HaKkGU')
 let mutes = new db.table('mutes');
 bot.mutes = mutes;
 let config = require('./botconfig.json');
@@ -20,8 +16,8 @@ bot.active = active;
 const vs = require('vimestats');
 const vsconfig = {
     token: 
-"NTcyMjg1OTUwMDM0NDQ0Mjk4.XhN66A.6mvnsECpCKT4wmYteTYAOSaQaac",
-    prefix: ".",
+"",
+    prefix: "",
     colors: {
         info: "#7289DA",
         error: "RED",
@@ -30,7 +26,7 @@ const vsconfig = {
 };
 
 vs(vsconfig.token, vsconfig.prefix, vsconfig.colors);
-// --giveaways
+
 
 //--Переменные
 
@@ -596,4 +592,4 @@ function deleteEmptyChannelAfterDelay(voiceChannel, delay = 300) {
     }, delay)
 
 }
-bot.login("NTcyMjg1OTUwMDM0NDQ0Mjk4.XhN66A.6mvnsECpCKT4wmYteTYAOSaQaac");
+bot.login("");
