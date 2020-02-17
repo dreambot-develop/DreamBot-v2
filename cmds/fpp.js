@@ -2,7 +2,7 @@ const Discord = module.require("discord.js");
 module.exports.run = async (bot,message,args) => {
     try{
     if(!message.member.voiceChannel) return bot.send(`**${message.author} зайдите в голосовой канал**`);
-    let pid = "642865170808438815";
+    let pid = "664961588029292554";
     if(message.member.voiceChannel.name.toLowerCase().indexOf('duo') == -1 && message.member.voiceChannel.name.toLowerCase().indexOf('squad') == -1 && message.member.voiceChannel.parentID != pid) return bot.send(`**${message.author} Зайдите в предназначеный для этого канал**`)
     let msg  = args.join(" ");
     if(!msg) return bot.send('**Использование !fpp ADR MAP**');
@@ -10,7 +10,7 @@ module.exports.run = async (bot,message,args) => {
     let num = parseInt(message.member.voiceChannel.userLimit - kma.length);
     if(num <= 0) return bot.send(`**Комната ${message.member.voiceChannel.name} заполнена**`);
     message.delete();
-    let findchannel = bot.channels.get('642865170808438815')
+    let findchannel = bot.channels.get('664961588029292554')
     let vid = message.member.voiceChannel.members.map(m => m.id)
     let usrs = '';
     let lnk;

@@ -4,6 +4,10 @@ global.fs = require('fs');
 const db = require('quick.db')
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
+//const DBL = require('dblapi.js');
+//const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MjI4NTk1MDAzNDQ0NDI5OCIsImJvdCI6dHJ1ZSwiaWF0IjoxNTc0MDgyODI0fQ.QvX-4Td26PTfsl9gXO9Y279WK3zIjYiB4Eo9GoGuyUQ');
+//const SDC = require('sdc-api');
+//const client = new SDC('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MjI4NTk1MDAzNDQ0NDI5OCIsInBlcm1zIjowLCJpYXQiOjE1NzcxMTYxMDJ9.a4-2KNbVvKD_917PMsuS_sSX4JWX-LQO-ElF5HaKkGU')
 let mutes = new db.table('mutes');
 bot.mutes = mutes;
 let config = require('./botconfig.json');
@@ -15,7 +19,8 @@ const active = new Map();
 bot.active = active;
 const vs = require('vimestats');
 const vsconfig = {
-    token: config.token,
+    token: 
+"NTcyMjg1OTUwMDM0NDQ0Mjk4.XhN66A.6mvnsECpCKT4wmYteTYAOSaQaac",
     prefix: ".",
     colors: {
         info: "#7289DA",
@@ -77,7 +82,9 @@ bot.on("warn", (e) => console.warn(e));
 bot.on("debug", (e) => console.info(e));
 bot.on('message', async message => {
     if ([`<@${bot.user.id}>`, `<@!${bot.user.id}>`].includes(message.content)) return message.channel.send(`Мой префикс: ${prefix}`);
-
+   // if(message.channel.id !== "640850761005269003") return;
+   // message.react(`👍`)
+  //  message.react(`👎`)
     if(message.author.id == '392332189544480770') return;
     if (!message.guild.me.hasPermission('SEND_MESSAGES')) return;
     if (message.guild.name != 'Discord Bot List') console.log(`Автор ${message.author.id} || ID сервера  ${message.guild.id} || Название сервера ${message.guild.name} || ID канала ${message.channel.id} || Название канала  ${message.channel.name} || Автор сообщения [${message.author.tag}] ||Владелец сервера ${message.guild.owner.user.id}|| || Сообщение ${message.content}`)
@@ -158,7 +165,7 @@ bot.on('message', async message => {
     worked = null;
     bot.worklist = [{ name: 'Безработный', addCoins: 50, works: 10 }, { name: 'Дворник', addCoins: 250, works: 30 }, { name: 'Строитель', addCoins: 1500, works: 60 }, { name: 'Заправщик', addCoins: 2500, works: 55 }, { name: 'Работник KFC', addCoins: 4250, works: 160 }, { name: 'Продавец', addCoins: 75000, works: 220 }, { name: 'Грузчик', addCoins: 15000, works: 300 }, { name: 'Уборщик в офисе', addCoins: 25000, works: 400 }, { name: 'Работник офиса', addCoins: 60000, works: 580 }, { name: 'Директор', addCoins: 150000, works: 800 }, { name: 'Бизнесмен', addCoins: 250000, works: 1200 }, { name: 'Трейдер', addCoins: 375000, works: 2000 }]
     //--Профиль
-    let atag = message.author.tag;
+    /*let atag = message.author.tag;
     dbl.hasVoted(`${message.author.id}`).then(async voteds => {
         if (voteds) {
             if (voted <= Date.now()) {
@@ -182,7 +189,7 @@ bot.on('message', async message => {
             }
         }
     });
-
+*/
     
     //Локальный профиль
 
@@ -342,14 +349,13 @@ bot.on('message', async message => {
 });
 
 
-//app.get('/', (req, res) => {
-    // ...
-//});
+
 
 bot.on("presenceUpdate", async (oldMember, newMember) => {
     try {
         if (!newMember.guild.me.hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return;
         if (newMember.user.bot) return;
+        if (newMember.guild.id != ['502949305372377096','653985545319612505']) return;
         async function ifGame(name, roleName, color) {
             if (newMember.presence.game) {
                 if (newMember.presence.game.name.toLowerCase().indexOf(name.toLowerCase()) != -1) {
@@ -459,7 +465,7 @@ bot.on("guildCreate", async(guild) => {
         }
 
     let channel = bot.channels.get(guild.systemChannelID || channelID);
-    channel.send('Приветствую! Спасибо, что пригласили меня на этот сервер! если вы нашли ошибку пишите ``.bug.`` Greetings! Thank you for inviting me to this server! if you find an error write ``.bug `` ');
+    channel.send('Приветствую! Спасибо, что пригласили меня на этот сервер! Если вы нашли ошибку пишите ``.bug.`` Greetings! Thank you for inviting me to this server! If you find an error write ``.bug `` ');
 
     let blacklist = JSON.parse(fs.readFileSync("./blacklist.json", "utf8"));
     bot.guilds.forEach((guild) => {
@@ -590,4 +596,4 @@ function deleteEmptyChannelAfterDelay(voiceChannel, delay = 300) {
     }, delay)
 
 }
-bot.login(config.token);
+bot.login("NTcyMjg1OTUwMDM0NDQ0Mjk4.XhN66A.6mvnsECpCKT4wmYteTYAOSaQaac");

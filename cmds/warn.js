@@ -25,6 +25,8 @@ module.exports.run = async (bot, message, args) => {
         let actions = lang.actions.split('<>')
         let admin = lang.admin.split('<>')
         let noMoney = lang.noMoney;
+        let warn = bot.lprofile.fetch(`warns_${rUser.id}_${rUser.guild.id}`);
+        let warns = ++warn
         let embed = new Discord.RichEmbed()
             .setTitle("**Варн**")
             .setColor('#e22216');
@@ -34,7 +36,7 @@ module.exports.run = async (bot, message, args) => {
 
         if (!args[0]) { embed.setDescription(noUser); return bot.send(embed); }
         if (!rUser) { embed.setDescription(noUser); return bot.send(embed); }
-        let warns = bot.lprofile.fetch(`warns_${rUser.id}_${rUser.guild.id}`);
+        
         bot.lprofile.add(`warns_${rUser.id}_${rUser.guild.id}`, 1);
         let embeds = new Discord.RichEmbed()
             .setDescription('Warn')

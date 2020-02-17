@@ -83,7 +83,6 @@ let coins = bot.profile.fetch(`coins_${us.id}`);
             .addField(`:heart: ${msgs[10]}`,  `\`${likes}\``, true)
             .addField(`⛏ ${msgs[12]}`,`\`${bot.worklist[work].name}\``,true)  
             .addField(`:military_medal: ${msgs[13]}`, `\`${votes}\``,true)
-            .addField(`:triangular_flag_on_post: ${msgs[3]}`, `\`${warns}\``,true)
 
         //.addField("Присоединился:", `\`${moment.utc(argsUser.joinedAt).format(`DD.MM.YYYY  |  HH:mm:ss `)}\``, true)
         //.addField("${msgs[15]}", `\`${moment.utc(argsUser.createdAt).format(`DD.MM.YYYY  |  HH:mm:ss `)}\`` , true)

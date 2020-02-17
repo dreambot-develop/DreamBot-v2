@@ -15,7 +15,7 @@
     "blockInvites":"Anti-Ads<>You have successfully enabled ad blocking",
     "bitcoin":"Bitcoin exchange Rate",
     "bonus":"You have already received a bonus. You can get it again via <>**${message.author.tag}** ${bk.bonus}. You will be able to get the bonus again through: ",
-    "botstats":"memory Usage<>Users<>Servers<>Channels<>number of commands<>Read messages:<>Sent messages<>Uptime<>API ping",
+    "botstats":"memory Usage<>Users<>Servers<>Channels<>number of commands<>Read messages:<>Sent messages<>Uptime<>API ping<>housing<>Status system<>click",
     "bug":"You have successfully shareportal bug",
     "noMoney":"You don't have enough money! Your balance: ",
     "casino":"Casino<>Specify from what balance you will bet **l** - Local **g** - Global<>Minimum bet: <>Specify the bet<>You won at the casino!\nYour win was: <>You lose: ",

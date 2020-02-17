@@ -61,6 +61,6 @@ console.log(error);
 };
 
 module.exports.help = {
-name: "lock",
+name: "lockdown",
     aliases: ["укрытие",'убитьчтобслетелачленососальня']
 }

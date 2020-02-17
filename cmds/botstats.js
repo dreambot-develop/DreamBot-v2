@@ -29,7 +29,8 @@ module.exports.run = async (bot, message, args) => {
         .setTimestamp()
         .addField(`⭕ | ${msgs[0]}`, `${(process.memoryUsage().heapUsed / (1000 * 1000)).toFixed(2)} MB`, true)
         .addField(`🕑 | ${msgs[7]}`, `${duration}`, true)
-        .addField(`👥 | ${msgs[1]}`, `${bot.users.size.toLocaleString()}`, true)
+        //.addField(`👥 | ${msgs[1]}`, `${bot.users.size.toLocaleString()}`, true)
+        .addField(`👥 | ${msgs[1]}`, `undefined`, true)
         .addField(`🌐 | ${msgs[2]}`, `${bot.guilds.size.toLocaleString()}`, true)
         .addField(`🗨 | ${msgs[3]}`, `${bot.channels.size.toLocaleString()}`, true)
         .addField(`⚙ | ${msgs[4]}`, `${bot.commands.size.toLocaleString()}`, true)
@@ -37,6 +38,8 @@ module.exports.run = async (bot, message, args) => {
         .addField(`📩 | ${msgs[6]}`, bot.botstats.fetch(`sendMessages`), true)
         .addField(`💡 | Discord.js`, `v${version}`, true)
         .addField(`〽 | ${msgs[8]}`, `${Math.round(bot.ping)}ms.`)//Задержка бота с DiscordAPI
+        .addField(`🏧| ${msgs[9]}`,`[netangels.ru](https://netangels.ru)`,true)
+        .addField(`⚙️| ${msgs[10]}`, `[${msgs[11]}](https://dreambot.freshstatus.io/)`, true)
         .addField(`💵 Поддержите автора и получите бонусы)`,`[Нажми сюда пж](https://boosty.to/dreambotdonate)`)
         .setFooter(rekl, message.author.avatarURL);
 
