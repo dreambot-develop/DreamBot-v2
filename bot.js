@@ -13,6 +13,8 @@ let adm = config.admin;
 bot.cd = config.cooldown;
 const active = new Map();
 bot.active = active;
+//const DBL = require('dblapi.js');
+//const dbl = new DBL('') ЧТОБ ПРИЗ ЗА голосование работал на 154 уберите комент и на 163 укажите ID вашего сервера
 const vs = require('vimestats');
 const vsconfig = {
     token: 
