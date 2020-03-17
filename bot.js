@@ -13,12 +13,11 @@ let adm = config.admin;
 bot.cd = config.cooldown;
 const active = new Map();
 bot.active = active;
-//const DBL = require('dblapi.js');
-//const dbl = new DBL('') ЧТОБ ПРИЗ ЗА голосование работал на 154 уберите комент и на 163 укажите ID вашего сервера
+const dblLib = require('dblapi.js');
+const dbl = new dblLib(process.env.DBL_TOKEN) // на 163 укажите ID вашего сервера
 const vs = require('vimestats');
 const vsconfig = {
-    token: 
-"",
+    token: process.env.TOKEN,
     prefix: "",
     colors: {
         info: "#7289DA",
@@ -168,11 +167,11 @@ bot.on('message', async message => {
         if (voteds) {
             if (voted <= Date.now()) {
                 console.log(`${atag} проголосовал`)
-                bot.channels.get('628607072107364353').send('${atag} проголосовал')
+                bot.channels.get(process.env.voteLogChannelID).send('${atag} проголосовал')
                 let random1 = Math.floor(Math.random() * (30000 - 10000) + 10000)
                 let random2 = Math.floor(Math.random() * (30000 - 10000) + 10000)
                 let userzid = userid;
-                let guildid = '628607071289606145'
+                let guildid = process.env.guildID
                 let coins = bot.profile.fetch(`coins_${userid}`);
                 if (coins === null) await bot.profile.set(`coins_${userzid}`, 0);
                 let lcoins = bot.lprofile.fetch(`coins_${userzid}_${guildid}`);
@@ -594,4 +593,4 @@ function deleteEmptyChannelAfterDelay(voiceChannel, delay = 300) {
     }, delay)
 
 }
-bot.login("");
+bot.login(process.env.TOKEN);
