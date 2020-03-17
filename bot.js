@@ -13,12 +13,11 @@ let adm = config.admin;
 bot.cd = config.cooldown;
 const active = new Map();
 bot.active = active;
-//const DBL = require('dblapi.js');
-//const dbl = new DBL('') ЧТОБ ПРИЗ ЗА голосование работал на 154 уберите комент и на 163 укажите ID вашего сервера
+const dblLib = require('dblapi.js');
+const dbl = new dblLib(process.env.DBL_TOKEN)
 const vs = require('vimestats');
 const vsconfig = {
-    token: 
-"",
+    token: process.env.TOKEN,
     prefix: "",
     colors: {
         info: "#7289DA",
@@ -51,14 +50,14 @@ bot.clan = allclans;
 //--Таблицы
 fs.readdir("./cmds/", (err, files) => {
 
-    if(err) console.log(err);
+    if (err) console.log(err);
     let jsfile = files.filter(f => f.split(".").pop() === "js");
-    if(jsfile.length <= 0){
+    if (jsfile.length <= 0) {
         console.log("Couldn't find commands.");
         return;
     }
 
-    jsfile.forEach((f, i) =>{
+    jsfile.forEach((f, i) => {
         let props = require(`./cmds/${f}`);
         console.log(`[BOOT]${i + 1}.${f}| ✅`);
         bot.commands.set(props.help.name, props);
@@ -69,10 +68,10 @@ fs.readdir("./cmds/", (err, files) => {
     });
 });
 fs.readdirSync('./events/').filter(file => file.endsWith('.js')).forEach(file => {
-  const event = require(`./events/${file}`);
-  let eventName = file.split('.')[0];
-  bot.on(eventName, event.bind(null, bot));
-  delete require.cache[require.resolve(`./events/${file}`)];
+    const event = require(`./events/${file}`);
+    let eventName = file.split('.')[0];
+    bot.on(eventName, event.bind(null, bot));
+    delete require.cache[require.resolve(`./events/${file}`)];
 });
 
 bot.on("error", (e) => console.error(e));
@@ -80,10 +79,10 @@ bot.on("warn", (e) => console.warn(e));
 bot.on("debug", (e) => console.info(e));
 bot.on('message', async message => {
     if ([`<@${bot.user.id}>`, `<@!${bot.user.id}>`].includes(message.content)) return message.channel.send(`Мой префикс: ${prefix}`);
-   // if(message.channel.id !== "640850761005269003") return;
-   // message.react(`👍`)
-  //  message.react(`👎`)
-    if(message.author.id == '392332189544480770') return;
+    // if(message.channel.id !== "640850761005269003") return;
+    // message.react(`👍`)
+    //  message.react(`👎`)
+    if (message.author.id == '392332189544480770') return;
     if (!message.guild.me.hasPermission('SEND_MESSAGES')) return;
     if (message.guild.name != 'Discord Bot List') console.log(`Автор ${message.author.id} || ID сервера  ${message.guild.id} || Название сервера ${message.guild.name} || ID канала ${message.channel.id} || Название канала  ${message.channel.name} || Автор сообщения [${message.author.tag}] ||Владелец сервера ${message.guild.owner.user.id}|| || Сообщение ${message.content}`)
     let botvmsgs = botstats.fetch(`viewMessages`);
@@ -95,15 +94,16 @@ bot.on('message', async message => {
     if (message.author.id == bot.user.id) botstats.add('sendMessages', 1);
     if (message.author.bot) return;
     if (message.channel.type == "dm") return;
-    function reset() { }
+
+    function reset() {}
     let ch = await bot.channels.get(message.channel.id);
-    bot.send = async function (msg) {
+    bot.send = async function(msg) {
 
         await ch.send(msg);
 
     };
     //Профиль
-    bot.sendcur = async function (usr, msg) {
+    bot.sendcur = async function(usr, msg) {
         let usrz = await bot.users.get(`${usr}`)
         if (usrz) await usrz.send(msg);
         usrz = null;
@@ -161,18 +161,66 @@ bot.on('message', async message => {
     let votes = profile.fetch(`votes_${userid}`);
     if (votes === null) profile.set(`votes_${userid}`, 0);
     worked = null;
-    bot.worklist = [{ name: 'Безработный', addCoins: 50, works: 10 }, { name: 'Дворник', addCoins: 250, works: 30 }, { name: 'Строитель', addCoins: 1500, works: 60 }, { name: 'Заправщик', addCoins: 2500, works: 55 }, { name: 'Работник KFC', addCoins: 4250, works: 160 }, { name: 'Продавец', addCoins: 75000, works: 220 }, { name: 'Грузчик', addCoins: 15000, works: 300 }, { name: 'Уборщик в офисе', addCoins: 25000, works: 400 }, { name: 'Работник офиса', addCoins: 60000, works: 580 }, { name: 'Директор', addCoins: 150000, works: 800 }, { name: 'Бизнесмен', addCoins: 250000, works: 1200 }, { name: 'Трейдер', addCoins: 375000, works: 2000 }]
+    bot.worklist = [{
+        name: 'Безработный',
+        addCoins: 50,
+        works: 10
+    }, {
+        name: 'Дворник',
+        addCoins: 250,
+        works: 30
+    }, {
+        name: 'Строитель',
+        addCoins: 1500,
+        works: 60
+    }, {
+        name: 'Заправщик',
+        addCoins: 2500,
+        works: 55
+    }, {
+        name: 'Работник KFC',
+        addCoins: 4250,
+        works: 160
+    }, {
+        name: 'Продавец',
+        addCoins: 75000,
+        works: 220
+    }, {
+        name: 'Грузчик',
+        addCoins: 15000,
+        works: 300
+    }, {
+        name: 'Уборщик в офисе',
+        addCoins: 25000,
+        works: 400
+    }, {
+        name: 'Работник офиса',
+        addCoins: 60000,
+        works: 580
+    }, {
+        name: 'Директор',
+        addCoins: 150000,
+        works: 800
+    }, {
+        name: 'Бизнесмен',
+        addCoins: 250000,
+        works: 1200
+    }, {
+        name: 'Трейдер',
+        addCoins: 375000,
+        works: 2000
+    }]
     //--Профиль
     /*let atag = message.author.tag;
     dbl.hasVoted(`${message.author.id}`).then(async voteds => {
         if (voteds) {
             if (voted <= Date.now()) {
                 console.log(`${atag} проголосовал`)
-                bot.channels.get('628607072107364353').send('${atag} проголосовал')
+                bot.channels.get(process.env.voteLogChannelID).send('${atag} проголосовал')
                 let random1 = Math.floor(Math.random() * (30000 - 10000) + 10000)
                 let random2 = Math.floor(Math.random() * (30000 - 10000) + 10000)
                 let userzid = userid;
-                let guildid = '628607071289606145'
+                let guildid = process.env.guildID
                 let coins = bot.profile.fetch(`coins_${userid}`);
                 if (coins === null) await bot.profile.set(`coins_${userzid}`, 0);
                 let lcoins = bot.lprofile.fetch(`coins_${userzid}_${guildid}`);
@@ -188,7 +236,7 @@ bot.on('message', async message => {
         }
     });
 */
-    
+
     //Локальный профиль
 
     let lcoins = lprofile.fetch(`coins_${userid}_${guildid}`);
@@ -237,11 +285,13 @@ bot.on('message', async message => {
         if (!marks.includes('💰') && coins >= 25000000) await addMark('💰');
         if (!marks.includes('💳') && coins >= 1000000000) await addMark('💳');
         if (!marks.includes('💎') && coins < 0) addMark('💎');
-      
+
         if (!marks.includes('💒') && partner) addMark('💒');
         if (!marks.includes('🏳️‍🌈') && message.content.toLowerCase() == 'я гей') addMark('🏳️‍🌈');
         if (!marks.includes('💥') && message.content.toLowerCase() == 'ливикс я тебя люблю') addMark('💥');
-        if (marks.indexOf('undefined') != -1) { bot.profile.delete(`marks_${message.author.id}`) }
+        if (marks.indexOf('undefined') != -1) {
+            bot.profile.delete(`marks_${message.author.id}`)
+        }
         let mm = null;
         //--Значки
     }
@@ -307,7 +357,11 @@ bot.on('message', async message => {
             if (!message.member.hasPermission('MANAGE_MESSAGES')) {
                 let embed = new Discord.RichEmbed()
                     .setColor('#e22216')
-                if (message.channel != cmdch) { message.delete(3 * 1000); embed.setDescription(`Использование команд только в <#${cmdchannel}>`); return message.channel.send(embed).then(msg => msg.delete(5 * 1000));; }
+                if (message.channel != cmdch) {
+                    message.delete(3 * 1000);
+                    embed.setDescription(`Использование команд только в <#${cmdchannel}>`);
+                    return message.channel.send(embed).then(msg => msg.delete(5 * 1000));;
+                }
                 cmdch = null;
                 embed = null;
             }
@@ -318,11 +372,14 @@ bot.on('message', async message => {
             .setColor('#ff0033')
             .setAuthor(`Выбор языка`)
             .setDescription(`:flag_ru: Используйте: ${prefix}lang ru\n:flag_gb: Use ${prefix}lang en`)
-            
+
         if (command != `${prefix}lang`) {
             return bot.send(emb)
         } else {
-            if(!message.member.hasPermission('ADMINISTRATOR')){emb.setDescription('Вам нужны права администратора\nYou need administrator rights');return bot.send(emb)};
+            if (!message.member.hasPermission('ADMINISTRATOR')) {
+                emb.setDescription('Вам нужны права администратора\nYou need administrator rights');
+                return bot.send(emb)
+            };
             if (args[0].toLowerCase() == 'ru') {
                 guild_$.set(`lang_${guildid}`, 'ru');
                 emb.setDescription('Теперь бот будет работать на **Русском** языке')
@@ -353,7 +410,7 @@ bot.on("presenceUpdate", async (oldMember, newMember) => {
     try {
         if (!newMember.guild.me.hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return;
         if (newMember.user.bot) return;
-        if (newMember.guild.id != ['502949305372377096','653985545319612505']) return;
+        if (newMember.guild.id != ['502949305372377096', '653985545319612505']) return;
         async function ifGame(name, roleName, color) {
             if (newMember.presence.game) {
                 if (newMember.presence.game.name.toLowerCase().indexOf(name.toLowerCase()) != -1) {
@@ -398,8 +455,8 @@ bot.on("presenceUpdate", async (oldMember, newMember) => {
         ifGame('visual studio', 'Code', '#35a6f0');
         ifGame('notepad++', 'Code', '#35a6f0');
         ifGame('minecraft', 'Minecraft', '90ee90');
-        ifGame('cristalix','Cristalix','35a6f0');
-        ifGame('vimeworld','Vimeworld','0008ff');
+        ifGame('cristalix', 'Cristalix', '35a6f0');
+        ifGame('vimeworld', 'Vimeworld', '0008ff');
         ifGame('roblox', 'Roblox', '#e2221a');
         ifGame('pubg lite', 'PUBG', '#e7a200');
         ifGame('witcher', 'Witcher', '#91192e');
@@ -418,39 +475,39 @@ bot.on("presenceUpdate", async (oldMember, newMember) => {
 
 });
 
- bot.on("guildCreate", async(guild) =>{
-   
-  let nserv = new Discord.RichEmbed()
-  .setTitle("Новый сервер")
-  .addField("ID", guild.id)
-  .addField("Owner ID", `${guild.owner.user.tag}, ${guild.owner.id}`)
-  .addField("Name", guild.name)
-  .addField("Users", guild.memberCount)
-   bot.channels.get("673547516863840279").send(nserv)
+bot.on("guildCreate", async (guild) => {
+
+    let nserv = new Discord.RichEmbed()
+        .setTitle("Новый сервер")
+        .addField("ID", guild.id)
+        .addField("Owner ID", `${guild.owner.user.tag}, ${guild.owner.id}`)
+        .addField("Name", guild.name)
+        .addField("Users", guild.memberCount)
+    bot.channels.get("673547516863840279").send(nserv)
 });
 
- bot.on("guildDelete", async(guild) =>{
-  
-  let rserv = new Discord.RichEmbed()
-  .setTitle("Выход с сервера")
-  .addField("ID", guild.id)
-  .addField("Owner ID", `${guild.owner.user.tag}, ${guild.owner.id}`)
-  .addField("Name", guild.name)
-  .addField("Users", guild.memberCount)
-   
- bot.channels.get("673547516863840279").send(rserv)
-})
-bot.on("guildCreate", async(guild) => {
-    
-  // let nserv = new Discord.RichEmbed()
-  // .setTitle("Новый сервер")
-  // .addField("ID", guild.id)
-  // .addField("Owner ID", `${guild.owner.user.tag}, ${guild.owner.id}`)
-  // .addField("Name", guild.name)
-  // .addField("Users", guild.memberCount)
-  //  bot.channels.get("673547516863840279").send(nserv)
+bot.on("guildDelete", async (guild) => {
 
-    
+    let rserv = new Discord.RichEmbed()
+        .setTitle("Выход с сервера")
+        .addField("ID", guild.id)
+        .addField("Owner ID", `${guild.owner.user.tag}, ${guild.owner.id}`)
+        .addField("Name", guild.name)
+        .addField("Users", guild.memberCount)
+
+    bot.channels.get("673547516863840279").send(rserv)
+})
+bot.on("guildCreate", async (guild) => {
+
+    // let nserv = new Discord.RichEmbed()
+    // .setTitle("Новый сервер")
+    // .addField("ID", guild.id)
+    // .addField("Owner ID", `${guild.owner.user.tag}, ${guild.owner.id}`)
+    // .addField("Name", guild.name)
+    // .addField("Users", guild.memberCount)
+    //  bot.channels.get("673547516863840279").send(nserv)
+
+
     let channelID;
     let channels = guild.channels;
     channelLoop:
@@ -468,7 +525,7 @@ bot.on("guildCreate", async(guild) => {
     let blacklist = JSON.parse(fs.readFileSync("./blacklist.json", "utf8"));
     bot.guilds.forEach((guild) => {
         if (!blacklist[guild.ownerID]) return
-        if(blacklist[guild.ownerID].state === true) {
+        if (blacklist[guild.ownerID].state === true) {
             channel.send("Владелец этого сервера находится в черном списке. Я выхожу. The owner of this server is blacklisted. I'm going out.")
             guild.leave(guild.id)
         }
@@ -478,10 +535,9 @@ bot.on("guildCreate", async(guild) => {
 
 
 
-
 bot.on('guildMemberAdd', (member) => {
 
-   // if (!member.guild.me.hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return;
+    // if (!member.guild.me.hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return;
     let guildid = member.guild.id
     let ejoin = new Discord.RichEmbed()
         .setTitle(`**Новый участник**`)
@@ -506,13 +562,21 @@ bot.on('guildMemberAdd', (member) => {
     let users = bot.channels.get(totalUsers);
     let bots = bot.channels.get(totalBots);
     if (users && bots) {
-        users.setName(`🤹 Кол-во юзеров: ${member.guild.members.filter(m => !m.user.bot).size}`).catch(err => { if (err) { member.guild.defaultChannel.send(`Произошла ошибка в SERVERSTATS.\nНапшите комманду **${prefix}stats** для устранения ошибки!`) } })
-        bots.setName(`🤖 Всего ботов: ${member.guild.members.filter(m => m.user.bot).size}`).catch(err => { if (err) { member.guild.defaultChannel.send(`Произошла ошибка в SERVERSTATS.\nНапшите комманду **${prefix}stats** для устранения оишбки!`) } })
+        users.setName(`🤹 Кол-во юзеров: ${member.guild.members.filter(m => !m.user.bot).size}`).catch(err => {
+            if (err) {
+                member.guild.defaultChannel.send(`Произошла ошибка в SERVERSTATS.\nНапшите комманду **${prefix}stats** для устранения ошибки!`)
+            }
+        })
+        bots.setName(`🤖 Всего ботов: ${member.guild.members.filter(m => m.user.bot).size}`).catch(err => {
+            if (err) {
+                member.guild.defaultChannel.send(`Произошла ошибка в SERVERSTATS.\nНапшите комманду **${prefix}stats** для устранения оишбки!`)
+            }
+        })
     }
     guildid, ejoin, joinChannel, role, muteRole, muted, wmsg, totalUsers, totalBots, users, bots = null;
 });
 bot.on('guildMemberRemove', (member) => {
-   // if (!member.guild.me.hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return;
+    // if (!member.guild.me.hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return;
     if (member.id == "533951944033697794") return;
     let guildid = member.guild.id
     let ejoin = new Discord.RichEmbed()
@@ -527,8 +591,16 @@ bot.on('guildMemberRemove', (member) => {
     let users = bot.channels.get(totalUsers);
     let bots = bot.channels.get(totalBots);
     if (users && bots) {
-        users.setName(`🤹 Кол-во юзеров: ${member.guild.members.filter(m => !m.user.bot).size}`).catch(err => { if (err) { member.guild.defaultChannel.send(`Произошла ошибка в SERVERSTATS.\nНапшите комманду **${prefix}stats** для устранения оишбки!`) } })
-        bots.setName(`🤖 Всего ботов: ${member.guild.members.filter(m => m.user.bot).size}`).catch(err => { if (err) { member.guild.defaultChannel.send(`Произошла ошибка в SERVERSTATS.\nНапшите комманду **${prefix}stats** для устранения оишбки!`) } })
+        users.setName(`🤹 Кол-во юзеров: ${member.guild.members.filter(m => !m.user.bot).size}`).catch(err => {
+            if (err) {
+                member.guild.defaultChannel.send(`Произошла ошибка в SERVERSTATS.\nНапшите комманду **${prefix}stats** для устранения оишбки!`)
+            }
+        })
+        bots.setName(`🤖 Всего ботов: ${member.guild.members.filter(m => m.user.bot).size}`).catch(err => {
+            if (err) {
+                member.guild.defaultChannel.send(`Произошла ошибка в SERVERSTATS.\nНапшите комманду **${prefix}stats** для устранения оишбки!`)
+            }
+        })
     }
     guildid, ejoin, joinChannel, totalUsers, totalBots, users, bots = null;
 });
@@ -555,7 +627,9 @@ bot.on("voiceStateUpdate", (oldMember, newMember) => {
     let ch = bot.channels.get(bot.guild.fetch(`roomCreator_${guildid}`))
     bot.ch = ch;
     if (newMember.voiceChannel && ch && newMember.voiceChannel.id == ch.id) {
-        newMember.guild.createChannel(`${newMember.displayName} `, { type: 'voice' }).catch(error => error)
+        newMember.guild.createChannel(`${newMember.displayName} `, {
+                type: 'voice'
+            }).catch(error => error)
             .then(channel => {
                 deleteEmptyChannelAfterDelay(channel);
                 channel.setParent(ch.parentID)
@@ -579,7 +653,7 @@ function deleteEmptyChannelAfterDelay(voiceChannel, delay = 300) {
     if (!voiceChannel) return;
     if (!voiceChannel.health) voiceChannel.health = 0;
     voiceChannel.health += 1;
-    setTimeout(function () {
+    setTimeout(function() {
         if (!voiceChannel) return;
         if (voiceChannel.members.first()) return;
         if (voiceChannel.health >= 2) voiceChannel.health = 1;
@@ -594,4 +668,4 @@ function deleteEmptyChannelAfterDelay(voiceChannel, delay = 300) {
     }, delay)
 
 }
-bot.login("");
+bot.login(process.env.TOKEN);
