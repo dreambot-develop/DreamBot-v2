@@ -2,6 +2,7 @@ global.Discord = require('discord.js');
 global.bot = new Discord.Client();
 global.fs = require('fs');
 const db = require('quick.db')
+require('dotenv').config()
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 let mutes = new db.table('mutes');
