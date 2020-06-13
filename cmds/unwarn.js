@@ -1,6 +1,7 @@
 //Завершено
 
-const Discord = module.require(`discord.js`);
+const Discord = module.require("discord.js");
+
 module.exports.run = async (bot, message, args) => {
     try {
         let bk = require('../botconfig.json');
@@ -10,7 +11,7 @@ module.exports.run = async (bot, message, args) => {
         let lang = require(`../lang_${bot.lang}.json`);
         let otherlang = require(`../lang_${bot.lang}.json`);
         let olang = otherlang.casino.split('<>');
-        let evaled = eval('`' + lang.voiceonline + '`');
+        let evaled = eval('`' + lang.unwarn + '`');
         let rekl = eval('`' + lang.rekl + '`');
         let noUser = lang.noUser;
         let noNum = lang.noNum;
@@ -25,30 +26,27 @@ module.exports.run = async (bot, message, args) => {
         let admin = lang.admin.split('<>')
         let noMoney = lang.noMoney;
         let embed = new Discord.RichEmbed()
-            .setTitle(`**${msgs[0]}**`)
-            .setColor('#e22216')
-        if (!message.member.hasPermission(`MANAGE_CHANNELS`)) { embed.setDescription(noPerm); return bot.send(embed); }
-        let voicename = args.join(` `);
-        if (!voicename) voicename = 'Voice-Online:'
-        message.guild.createChannel(`${voicename} ${message.guild.members.filter(m => m.voiceChannel).size}`, { type: 'voice' }).then(channel => {
+            .setTitle(msgs[0])
+            .setColor('#e22216');
+        if (!message.member.hasPermission("BAN_MEMBERS")) { embed.setDescription(noPerm); return bot.send(embed); }
 
-            bot.guild.set(`voiceOnline_${message.guild.id}`, channel.id);
-            bot.guild.set(`voiceOnlineText_${message.guild.id}`, voicename);
+        let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
 
-            channel.overwritePermissions(message.guild.defaultRole, {
-                VIEW_CHANNEL: true,
-                CONNECT: false,
-            })
-        });
+        if (!args[0]) { embed.setDescription(noUser); return bot.send(embed); }
+        if (!rUser) { embed.setDescription(noUser); return bot.send(embed); }
+        let warns = bot.lprofile.fetch(`warns_${rUser.id}_${rUser.guild.id}`);
+        if (warns <= 0) { embed.setDescription(msgs[0]); embed.setDescription(msgs[1]); return bot.send(embed); }
+        bot.lprofile.subtract(`warns_${rUser.id}_${rUser.guild.id}`, 1);
         let embeds = new Discord.RichEmbed()
             .setDescription(msgs[0])
-            .setColor('#004953')
-            .addField(msgs[1], `${voicename} ${message.guild.members.filter(m => m.voiceChannel).size}`)
-            .setFooter(rekl, message.author.avatarURL);
+            .setColor('#25ca85')
+            .addField(admin, message.author.username)
+            .addField(msgs[2], `${rUser.user.username}`)
+            .addField("Количество предупрежденией | Warns:", `${warns}/3`);
         let logsname = 'logs'
         let logschannel = message.guild.channels.get(bot.guild.fetch(`logsChannel_${message.guild.id}`));
         if (!logschannel) {
-            await message.guild.createChannel(logsname, 'text').then(channel => {
+            await message.guild.createChannel(logsname, { type: 'text' }).then(channel => {
 
                 bot.guild.set(`logsChannel_${message.guild.id}`, channel.id);
                 channel.overwritePermissions(message.guild.defaultRole, {
@@ -58,7 +56,7 @@ module.exports.run = async (bot, message, args) => {
         }
         logschannel.send(embeds)
         bot.send(embeds);
-      } catch (err) {
+    } catch (err) {
         let bk = require('../botconfig.json');
         let a = bot.users.get(bk.admin)
         let errEmb = new Discord.RichEmbed()
@@ -73,6 +71,6 @@ module.exports.run = async (bot, message, args) => {
 
 };
 module.exports.help = {
-    name: `voiceonline`,
-    aliases: ['голосовойонлайн']
+    name: "unwarn",
+    aliases: ["снятьварн", 'снятьпредупреждение']
 };

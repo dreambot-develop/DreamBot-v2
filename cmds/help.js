@@ -1,6 +1,7 @@
-//Завершено
+	//Завершено
 
-const Discord = module.require(`discord.js`);
+const Discord = require("discord.js");
+const rm = require("discord.js-reaction-menu");
 
 module.exports.run = async (bot, message, args) => {
     try {
@@ -20,104 +21,125 @@ module.exports.run = async (bot, message, args) => {
         let actions = lang.actions.split('<>')
         let admin = lang.admin.split('<>')
         let noMoney = lang.noMoney;
-        if (!args[0]) {
-        let emb = new Discord.RichEmbed()
-            .setDescription(`HELP`)
-            .setColor('#00dbff')
-            .addField(`**:dollar: ${msgs[0]}**`, '``.add`` ``.bonus`` ``.casino`` ``.clan`` ``.pay`` ``.profile`` ``.shop`` ``.set`` ``.marks`` ``.work`` ``.groll`` ``.lroll``')
-            .addField(`**:gun: ${msgs[1]}**`, ' ``.report`` ``.autorole`` ``.welcomemessage`` ``.createstats`` ``.roomcreator`` ``.cmdchannel`` ``.sh`` ``.voiceonline`` ``.blockinvites``')
-            .addField(`**:desktop: ${msgs[2]}**`, '``.davatar`` ``.help`` ``.ping`` ``.invite`` ``.userinfo`` ``.serverinfo`` ``.sdcserverinfo`` ``.createstats`` ``.botstats``')
-            .addField(`**:tada: ${msgs[3]}**`, '``.joke`` ``.cat`` ``.dog`` ``.fox`` ``.kiss`` ``.slap`` ``.roll`` ``.ms`` ``.marry`` ``.like`` ``.textfilp`` ``.t`` ``.gihub`` ')
-            .addField(`**:bar_chart: ${msgs[4]}**`,'``.help`` ``.stats`` ``.guild id/name/tag`` ``.staff`` ``.ping`` ``.streams``')
-            .setFooter(`${msgs[5]}`)
-            .setThumbnail('https://cdn.discordapp.com/avatars/572285950034444298/698a301c9c0f9d732e1b8aafd9cb7b82.png');
-        bot.send(emb)
-        }
-        if (args[0] == "eco") { 
-        let eco = new Discord.RichEmbed()
-        .setDescription(`${msgs[7]}`)
-        .setColor(`GREEN`)
-        .addField('.add',`${msgs[8]}`)
-        .addField('.bonus',`${msgs[9]}`)
-        .addField('.casino',`${msgs[10]}`)
-        .addField('.guild',`${msgs[11]}`)
-        .addField('.pay',`${msgs[12]}`)
-        .addField('.profile',`${msgs[13]}`)
-        .addField('.shop',`${msgs[14]}`)
-        .addField('.set',`${msgs[14]}`)
-        .addField('.marks',`${msgs[15]}`)
-        .addField('.work',`${msgs[16]}`)
-        .addField('.lroll',`${msgs[17]}`)
-        .addField('.groll',`${msgs[18]}`)
-        .setFooter(rekl, message.author.avatarURL);
-        bot.send(eco)
-
-
-                    };
-     if (args[0] == "admin") {
-    let admin = new Discord.RichEmbed()
-         .setDescription(`${msgs[19]}`)
-         .addField('.report',`${msgs[20]}`)
-         .addField('.autorole',`${msgs[21]}`)
-         .addField('.welcomemessage',`${msgs[22]}`)
-         .addField('.createstats',`${msgs[23]}`)
-         .addField('.roomcreator',`${msgs[24]}`)
-         .addField('.cmdchannel #упоминание/ping',`${msgs[25]}`)
-         .addField('.sh', `${msgs[26]}`)
-         .addField('.voiceonline ваше название/your name',`${msgs[27]}`)
-         .addField('.blockinvites',`${msgs[28]}`)
+  
+  let e = new Discord.RichEmbed()
+    .setThumbnail(bot.user.displayAvatarURL)
+ .setDescription(`HELP`)
+          .setColor(`#ff00ff`)
+         .setDescription(`HELP`)
+         .addField(`${msgs[52]}`, ` \n 1️⃣${msgs[53]} \n 2️⃣${msgs[54]} \n 3️⃣${msgs[55]} \n 4️⃣${msgs[56]} \n 5️⃣${msgs[57]}`)
+         .addField(`<:github:679016893369286657>`, `[GitHub](https://github.io/MrLivixx/dreambot-v2)`)
          .setFooter(rekl, message.author.avatarURL);
-        bot.send(admin)
 
-    };
-    if (args[0] == "info") {
-   let info = new Discord.RichEmbed()
-     .setDescription(`${msgs[29]}`)
-     .addField('.avatar',`${msgs[30]}`)
-     .addField('.help',`${msgs[31]}`)
-     .addField('.ping',`${msgs[32]}`)
-     .addField('.invite', `${msgs[33]}`)
-     .addField('.userinfo',`${msgs[34]}`)
-     .addField('.serverinfo',`${msgs[35]}`)
-     .addField('.createstats',`${msgs[36]}`) 
-     .addField('.botstats',`${msgs[37]}`)
+  let main = new Discord.RichEmbed()
+          .setDescription(`${msgs[6]}`,true)
+          .setColor(`#ff00ff`)
+        .addField('.add',`${msgs[7]}`,true)
+        .addField('.bonus',`${msgs[8]}`,true,true)
+        .addField('.casino',`${msgs[9]}`,true)
+        .addField('.guild',`${msgs[10]}`,true)
+        .addField('.pay',`${msgs[11]}`,true)
+        .addField('.profile',`${msgs[12]}`,true)
+        .addField('.shop',`${msgs[13]}`,true)
+        .addField('.set',`${msgs[14]}`,true)
+        .addField('.marks',`${msgs[15]}`,true)
+        .addField('.work',`${msgs[16]}`,true)
+        .addField('.lroll',`${msgs[17]}`,true)
+        .addField('.groll',`${msgs[18]}`,true)
+        .setFooter(rekl, message.author.avatarURL);
+  
+  let adm = new Discord.RichEmbed()
+          .setColor(`#ff00ff`)
+  .setDescription(`${msgs[19]}`,true)
+         .addField('.report',`${msgs[20]}`,true)
+         .addField('.autorole',`${msgs[21]}`,true)
+         .addField('.welcomemessage',`${msgs[22]}`,true)
+         .addField('.createstats',`${msgs[23]}`,true)
+         .addField('.roomcreator',`${msgs[24]}`,true)
+         .addField('.cmdchannel #упоминание/ping',`${msgs[25]}`,true)
+         .addField('.sh', `${msgs[26]}`,true)
+         .addField('.voiceonline ваше название/your name',`${msgs[27]}`,true)
+         .addField('.blockinvites',`${msgs[28]}`,true)
+         .addField('.resetchat',`Пересоздать канал`,true)
+         .addField('.lock',`${msgs[58]}`,true)
+         .setFooter(rekl, message.author.avatarURL);
+  
+  let stuffs = new Discord.RichEmbed()
+            .setColor(`#ff00ff`)
+
+   .setDescription(`${msgs[29]}`,true)
+     .addField('.avatar',`${msgs[30]}`,true)
+     .addField('.help',`${msgs[31]}`,true)
+     .addField('.ping',`${msgs[32]}`,true)
+     .addField('.invite', `${msgs[33]}`,true)
+     .addField('.userinfo',`${msgs[34]}`,true)
+     .addField('.serverinfo',`${msgs[35]}`,true)
+     .addField('.createstats',`${msgs[36]}`,true) 
+     .addField('.botstats',`${msgs[37]}`,true)
      .setFooter(rekl, message.author.avatarURL);
      
-     bot.send(info)
-    };
-    if (args[0] == "fun") {
-        let fun = new Discord.RichEmbed()
-        .setDescription(`${msgs[38]}`)  
-        .addField('.joke',`${msgs[39]}`)
-        .addField('.cat', `${msgs[40]}`)
-        .addField('.dog',`${msgs[41]}`)
-        .addField('.fox',`${msgs[42]}`)
-        .addField('.kiss @упоминание/@metion',`${msgs[43]}`)
-        .addField('.slap @упоминание/@metion',`${msgs[44]}`)
-        .addField('.roll число',`${msgs[45]}`)
-        .addField('.ms',`${msgs[46]}`)
-        .addField('.marry',`${msgs[47]}`)
-        .addField('.like @упомнинание/@metion',`${msgs[48]}`)
-        .addField('.textflip',`${msgs[49]}`)
-        .addField('.gihub',`${msgs[50]}`)
-        .addField('.t',`${msgs[51]}`)
+  let configs = new Discord.RichEmbed()
+    .setDescription(`${msgs[38]}`,true)  
+              .setColor(`#ff00ff`)
 
-        bot.send(fun)
-     };
+        .addField('.joke',`${msgs[39]}`,true)
+        .addField('.cat', `${msgs[40]}`,true)
+        .addField('.dog',`${msgs[41]}`,true)
+        .addField('.fox',`${msgs[42]}`,true)
+        .addField('.kiss @упоминание/@metion',`${msgs[43]}`,true)
+        .addField('.slap @упоминание/@metion',`${msgs[44]}`,true)
+        .addField('.roll число',`${msgs[45]}`,true)
+        .addField('.ms',`${msgs[46]}`,true)
+        .addField('.marry',`${msgs[47]}`,true)
+        .addField('.like @упомнинание/@metion',`${msgs[48]}`,true)
+        .addField('.textflip',`${msgs[49]}`,true)
+        .addField('.gihub',`${msgs[50]}`,true)
+        .addField('.t',`${msgs[51]}`,true)
+        // .addField(`.anal`, `Вы уже взрослые и сами знаете <a:emoji_22:673972763647672362>`,true)
+        // .addField(`.classic`, `Вы уже взрослые и сами знаете <a:emoji_22:673972763647672362>`,true)
+        // .addField(`.hentai`, `Вы уже взрослые и сами знаете <a:emoji_22:673972763647672362>`,true)
+        // .addField(`.kuni`, `Вы уже взрослые и сами знаете <a:emoji_22:673972763647672362>`,true)
+        // .addField(`.neko`, `Неко`,true)
+        // .addField(`.pussy`, `Вы уже взрослые и сами знаете <a:emoji_22:673972763647672362>`,true)
+        // .addField(`.trap`, `Вы уже взрослые и сами знаете <a:emoji_22:673972763647672362>`,true)
+        // .addField(`.yuri`, `Вы уже взрослые и сами знаете <a:emoji_22:673972763647672362>`,true)
+
+
+        
+       var commands = 
+            `Игрок:\n`+
+            `- \`stats <никнейм>\` | Просмотр статистики игрока\n`+
+            `- \`friends <никнейм>\` | Перечисление друзей игрока\n\n`+
+            `Гильдия:\n`+
+            `- \`guild -i <ID> | -t <тэг> | -n <имя>\` | Просмотр статистики гильдии\n\n`+
+            `Онлайн:\n`+
+            `- \`online\` | Просмотр онлайна на сервере\n`+
+            `- \`streams\` | Просмотр идущих стримов на сервере\n`+
+            `- \`staff\` | Перечисление персонала сервера онлайн`;
+  let vime = new Discord.RichEmbed()
+                .setColor("#36393f")
+                .setTitle('Команды для взаимодействия с данными VimeWorld \n Префикс ``.v``')
+                .setDescription(commands)
+                
+  new rm.menu(message.channel, message.author.id, [e, main, adm, stuffs, configs,vime], 240000);
+  
+  
+     
     } catch (err) {
         let bk = require('../botconfig.json');
         let a = bot.users.get(bk.admin)
         let errEmb = new Discord.RichEmbed()
-            .setTitle(`${err[0]}`)
+            .setTitle(`${err[0]}`,true)
             .setColor('#ff2400')
             .addField(`**${err.name}**`, `**${err.message}**`)
-            .setFooter(`${err[1]} ${a.tag}`, bot.user.avatarURL)
+            .setFooter(`${err[1]} ${a.tag}`,true, bot.user.avatarURL)
             .setTimestamp();
         bot.send(errEmb);
         console.log(err.stack);
     }
 };
 module.exports.help = {
+
     name: `help`,
     aliases: [`h`, `помощь`, 'хелп', 'хэлп', 'помогите', 'помогающий', 'помогатор', 'помогитехристаради', 'помощник', 'помогать', 'спасите', 'нупомогите']
 };

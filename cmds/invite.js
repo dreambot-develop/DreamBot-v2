@@ -22,7 +22,7 @@ exports.run = async (bot, message, args) => {
     let emb = new Discord.RichEmbed()
         .setDescription(msgs[0])
         .setColor('#10e250')
-        .addField(msgs[1], 'https://discord.gg/uX8PdJX')
+        .addField(msgs[1], "https://discord.gg/tp8Mytu")
         .addField(msgs[2], 'https://cutt.ly/directordiscordbot')
         .addField(msgs[3],'https://top.gg/bot/572285950034444298/vote')
     bot.send(emb)

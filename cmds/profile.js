@@ -2,7 +2,6 @@
 
 const Discord = module.require("discord.js");
 const moment = require("moment");
-
 module.exports.run = async (bot, message, args) => {
     try {
         let bk = require('../botconfig.json');
@@ -23,9 +22,37 @@ module.exports.run = async (bot, message, args) => {
         let actions = lang.actions.split('<>')
         let noMoney = lang.noMoney;
 
-
+        
+          // - -  - - - -
 let us = message.mentions.users.first() ? message.mentions.users.first() : message.author;
-let coins = bot.profile.fetch(`coins_${us.id}`);
+const status = {
+    online: "В сети",
+    idle: "Не активный",
+    dnd: "Не беспокоить",
+    offline: "Не в сети"
+  };
+  const devices = {
+     desktop: "Компьютер",
+     web: "Браузер",
+     mobile: "Телефон"
+  }
+  const statuses = {
+     online: "<:online:635177496773656596> ",
+     idle: " <:402784531356188672:635418347881627658>",
+     dnd: "<:dnd:635177496773525508>",
+     offline: "<:offline:635177496685314049> Не в сети",
+     invisible: "<:offline:635177496685314049>   Не в сети"
+  }
+  let desc = "";
+      if(us.presence.clientStatus && Object.keys(us.presence.clientStatus).length > 0) {
+        for (let device in message.author.presence.clientStatus) {
+          desc += `${statuses[us.presence.clientStatus[device]]} ${devices[device]}\n`
+        }
+      } else {
+        desc = statuses[us.presence.status]
+      }
+
+	let coins = bot.profile.fetch(`coins_${us.id}`);
         let lvl = bot.profile.fetch(`lvl_${us.id}`);
         let xp = bot.profile.fetch(`xp_${us.id}`);
         let rep = bot.profile.fetch(`rep_${us.id}`);
@@ -83,6 +110,7 @@ let coins = bot.profile.fetch(`coins_${us.id}`);
             .addField(`:heart: ${msgs[10]}`,  `\`${likes}\``, true)
             .addField(`⛏ ${msgs[12]}`,`\`${bot.worklist[work].name}\``,true)  
             .addField(`:military_medal: ${msgs[13]}`, `\`${votes}\``,true)
+            .addField("Статус", `${desc}`, true)
 
         //.addField("Присоединился:", `\`${moment.utc(argsUser.joinedAt).format(`DD.MM.YYYY  |  HH:mm:ss `)}\``, true)
         //.addField("${msgs[15]}", `\`${moment.utc(argsUser.createdAt).format(`DD.MM.YYYY  |  HH:mm:ss `)}\`` , true)

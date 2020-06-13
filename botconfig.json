@@ -1,6 +1,8 @@
 {
-    "prefix":"",
+    "prefix":".",
     "bonus":500,
     "cooldown":1440,
-    "admin":""
+    "admin":"587697798628114442",
+    "sdct":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MjI4NTk1MDAzNDQ0NDI5OCIsInBlcm1zIjowLCJpYXQiOjE1OTEyNjI5ODd9.u-C3bB-CjZGR9HYdyLjLVyhTHMR1e0IshPSMAdY_Eh0",
+    "dblt":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MjI4NTk1MDAzNDQ0NDI5OCIsImJvdCI6dHJ1ZSwiaWF0IjoxNTg5MDUwMjE4fQ.h9e_aW1aEu4tj-RAS3Lagjda4RP8dJSJcC3cZ3-0gZo"
 }

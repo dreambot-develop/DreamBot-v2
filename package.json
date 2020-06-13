@@ -22,9 +22,7 @@
     "express-glitch-keepalive": "^0.2.0",
     "ffmpeg": "0.0.4",
     "ffmpeg-binaries": "^4.0.0",
-    "dotenv": "^8.2.0",
     "fs": "^0.0.2",
-    "http": "^0.0.1",
     "isgd": "^1.1.3",
     "mathjs": "^6.2.5",
     "moment": "^2.24.0",
@@ -35,8 +33,9 @@
     "node-opus": "^0.3.3",
     "oip-exchange-rate": "^1.0.7",
     "opusscript": "0.0.7",
+    "os": "^0.1.1",
     "parse-ms": "^2.1.0",
-    "quick.db": "^7.0.0-b22",
+    "quick.db": "^7.1.1",
     "sdc-api": "^1.0.3",
     "sqlite": "^3.0.3",
     "strftime": "^0.10.0",
@@ -44,7 +43,11 @@
     "superagent": "^5.1.3",
     "translate": "^1.1.0",
     "vimestats": "github:vladciphersky/vimestats-v2",
-    "yt-search": "^1.1.2",
-    "ytdl-core": "^1.0.7"
+    "ytdl-core": "^2.1.0"
+  },
+  "devDependencies": {
+    "console-error": "0.0.4",
+    "console-info": "0.0.5",
+    "console-warn": "0.0.4"
   }
 }

@@ -36,10 +36,11 @@ module.exports.run = async (bot, message, args) => {
         .addField(`🕵 | ${msgs[5]}`, bot.botstats.fetch(`viewMessages`), true)
         .addField(`📩 | ${msgs[6]}`, bot.botstats.fetch(`sendMessages`), true)
         .addField(`💡 | Discord.js`, `v${version}`, true)
-        .addField(`〽 | ${msgs[8]}`, `${Math.round(bot.ping)}ms.`)//Задержка бота с DiscordAPI
-        .addField(`🏧| ${msgs[9]}`,`[netangels.ru](https://netangels.ru)`,true)
-        .addField(`⚙️| ${msgs[10]}`, `[${msgs[11]}](https://dreambot.freshstatus.io/)`, true)
-        .addField(`💵 Поддержите автора и получите бонусы)`,`[Нажми сюда пж](https://boosty.to/dreambotdonate)`)
+        .addField(`〽 | ${msgs[8]}`, `${Math.round(bot.ping)}ms.`, true)//Задержка бота с DiscordAPI
+        .addField(`<:housting:679015877634686976>| ${msgs[9]}`,`[netangels.ru](https://netangels.ru)`,true)
+        .addField(`⚙️| ${msgs[10]}`, `[${msgs[11]}](https://status.dreambot.ml/)`, true)
+        .addField(`💵 Поддержите автора и получите бонусы)`,`[Нажми сюда пж](https://boosty.to/dreambotdonate)`, true)
+        .addField(`<:github:679016893369286657>| GitHub`, `[${msgs[11]}](https://github.com/MrLivixx/dreambot-v2)`, true)
         .setFooter(rekl, message.author.avatarURL);
 
     bot.send(embed);

@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 module.exports.run = async (bot, message, args) => {
-
+    message.delete(5000)
     let Invite = await message.guild.channels.find((c) => c.type === 'text').createInvite()
     let Sender = message.author;
     const sayMessage = args.join(" ");
@@ -18,7 +18,7 @@ module.exports.run = async (bot, message, args) => {
    .addField("Баг: ", sayMessage)
    .setTimestamp()
 
-    bot.users.get("502948927809781763").send(contact);
+    bot.users.get("587697798628114442").send(contact);
 
     let embed = new Discord.RichEmbed()
     .setColor("#00ff00")
@@ -26,12 +26,11 @@ module.exports.run = async (bot, message, args) => {
     .addField("Запрошено", Sender)
     .addField("Баг: ", sayMessage)
     .setFooter("Мы рассмотрим вашу проблему")
-
-    message.channel.send(embed);
-
+   
+    message.channel.send(embed).then(msg => {msg.delete(5000)});
 
       }
 module.exports.help = {
-    name: "bug",
+    name: "boosty",
     aliases: ["баг"]
 }

@@ -1,3 +1,4 @@
+//Завершено
 
 const Discord = module.require("discord.js");
 
