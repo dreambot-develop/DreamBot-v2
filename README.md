@@ -18,7 +18,7 @@ DreamBot v2 больше не поддерживается разработчи�
 </a>
 <a href="https://top.gg/bot/572285950034444298" >
   <img src="https://top.gg/api/widget/owner/572285950034444298.svg?noavatar=true" alt="DreamBot" />
-</a>
+</a> [![Discord](https://discordapp.com/api/guilds/662635194884292611/widget.png)](https://discord.gg/GG9Dkhg)
 
 # Библиотеки
 * База данных - quick.db
