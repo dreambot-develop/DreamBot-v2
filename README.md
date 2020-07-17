@@ -4,6 +4,7 @@ DreamBot v2 больше не поддерживается разработчи�
 # DreamBot
 Полный исходный код бота DreamBot
 
+[![Discord](https://discordapp.com/api/guilds/662635194884292611/widget.png)](https://discord.gg/GG9Dkhg)
 <a href="https://top.gg/bot/572285950034444298" >
   <img src="https://top.gg/api/widget/status/572285950034444298.svg?noavatar=true" alt="DreamBot" />
 </a>
@@ -18,7 +19,9 @@ DreamBot v2 больше не поддерживается разработчи�
 </a>
 <a href="https://top.gg/bot/572285950034444298" >
   <img src="https://top.gg/api/widget/owner/572285950034444298.svg?noavatar=true" alt="DreamBot" />
-</a> [![Discord](https://discordapp.com/api/guilds/662635194884292611/widget.png)](https://discord.gg/GG9Dkhg)
+</a>  
+
+
 
 # Библиотеки
 * База данных - quick.db
